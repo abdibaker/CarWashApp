@@ -12,8 +12,8 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Home',
+          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           headerRight: () => (
             <Link href="/modal" asChild>
               <HeaderButton />
@@ -22,10 +22,24 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="explore"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Explore',
+          tabBarIcon: ({ color }) => <TabBarIcon name="map-marker" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="book-mark"
+        options={{
+          title: 'Book Mark',
+          tabBarIcon: ({ color }) => <TabBarIcon name="bookmark" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
         }}
       />
     </Tabs>
