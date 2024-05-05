@@ -1,12 +1,16 @@
 import { StyleSheet, View } from 'react-native';
+import { Button, Text } from 'react-native-paper';
 
-import { ScreenContent } from '~/components/ScreenContent';
+import { $user, signOut } from '@/context/authContext';
 
 export default function Home() {
   return (
     <>
       <View style={styles.container}>
-        <ScreenContent path="app/(tabs)/index.tsx" title="Tab One" />
+        <Text>{$user.get()?.username}</Text>
+        <Button onPress={signOut} mode="contained">
+          Sign out
+        </Button>
       </View>
     </>
   );

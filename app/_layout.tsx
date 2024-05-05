@@ -1,17 +1,22 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import 'expo-dev-client';
+import { Stack } from 'expo-router';
+import { PaperProvider } from 'react-native-paper';
 import '../global.css';
 
-import { Stack } from 'expo-router';
-
-export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)',
-};
+const queryClient = new QueryClient({});
 
 export default function RootLayout() {
+
   return (
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-    </Stack>
+    <QueryClientProvider client={queryClient}>
+      <PaperProvider>
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="index" />
+          <Stack.Screen name="(auth)" />
+          <Stack.Screen name="(authenticated)" />
+        </Stack>
+      </PaperProvider>
+    </QueryClientProvider>
   );
 }

@@ -3,10 +3,10 @@ import { StyleSheet, View } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 
 const INITIAL_REGION = {
-  latitude: -6.1659,
-  longitude: 39.2026,
-  latitudeDelta: 0.0922,
-  longitudeDelta: 0.0421,
+  latitude: -6.1,
+  longitude: 39.36,
+  latitudeDelta: 0.4,
+  longitudeDelta: 0.4,
 };
 
 export default function Explore() {
@@ -16,6 +16,8 @@ export default function Explore() {
         style={StyleSheet.absoluteFill}
         provider={PROVIDER_GOOGLE}
         initialRegion={INITIAL_REGION}
+        showsUserLocation
+        showsMyLocationButton
       />
     </View>
   );
