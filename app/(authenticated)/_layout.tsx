@@ -9,7 +9,7 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: 'black',
         headerLeft: () => (
-          <View className="">
+          <View>
             <Image
               source={require('@/assets/logo.png')}
               style={{ height: 40, width: 80, margin: 10 }} // Removed the 'objectFit' property
@@ -17,7 +17,7 @@ export default function TabLayout() {
           </View>
         ),
         headerRight: () => (
-          <View className="">
+          <View>
             <Image
               source={require('@/assets/avatar.png')}
               style={{ height: 40, width: 40, margin: 10 }} // Removed the 'objectFit' property
@@ -28,14 +28,14 @@ export default function TabLayout() {
       <Tabs.Screen
         name="home"
         options={{
-          title: '',
+          title: 'Home',
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
-          title: '',
+          title: 'Explore',
           tabBarIcon: ({ color }) => <TabBarIcon name="map-marker" color={color} />,
         }}
       />

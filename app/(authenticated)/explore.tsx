@@ -1,8 +1,10 @@
-import React from 'react';
+import BottomSheet from '@gorhom/bottom-sheet';
+import React, { useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 
-import { useCarWash } from '@/queries/useCarWash';
+import BSheet from '@/components/BSheet';
+import { CarWash, useCarWash } from '@/queries/useCarWash';
 
 const INITIAL_REGION = {
   latitude: -6.1,
@@ -12,31 +14,41 @@ const INITIAL_REGION = {
 };
 
 export default function Explore() {
+  const bottomSheetRef = useRef<BottomSheet>(null);
+  const [selectedCarWash, setSelectedCarWash] = useState<CarWash>();
   const { data } = useCarWash();
 
+  function handleSheetOpen(data: CarWash) {
+    setSelectedCarWash(data);
+    bottomSheetRef.current?.expand();
+  }
+
   return (
-    <View style={{ flex: 1 }}>
-      <MapView
-        style={StyleSheet.absoluteFill}
-        provider={PROVIDER_GOOGLE}
-        initialRegion={INITIAL_REGION}
-        showsUserLocation
-        showsMyLocationButton>
-        {data &&
-          data.map((marker, index) => (
-            <Marker
-              key={index}
-              coordinate={{
-                latitude: Number(marker.latitude),
-                longitude: Number(marker.longitude),
-              }}
-              title={marker.name}
-              description={marker.location}
-              image={require('../../assets/map-pin.png')}
-              onPress={() => console.log(marker.name)}
-            />
-          ))}
-      </MapView>
-    </View>
+    <>
+      <View style={{ flex: 1 }}>
+        <MapView
+          style={StyleSheet.absoluteFill}
+          provider={PROVIDER_GOOGLE}
+          initialRegion={INITIAL_REGION}
+          showsUserLocation
+          showsMyLocationButton>
+          {data &&
+            data.map((marker, index) => (
+              <Marker
+                key={index}
+                coordinate={{
+                  latitude: Number(marker.latitude),
+                  longitude: Number(marker.longitude),
+                }}
+                title={marker.name}
+                description={marker.location}
+                image={require('../../assets/map-pin.png')}
+                onPress={() => handleSheetOpen(marker)}
+              />
+            ))}
+        </MapView>
+      </View>
+      <BSheet ref={bottomSheetRef} data={selectedCarWash!} />
+    </>
   );
 }

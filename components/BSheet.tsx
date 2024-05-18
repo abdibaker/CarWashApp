@@ -1,19 +1,28 @@
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { observer } from '@legendapp/state/react';
 import { forwardRef } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+
+import { CarWash } from '@/queries/useCarWash';
+
+interface Props {
+  data: CarWash;
+}
 
 export default observer(
-  forwardRef<any>((_, ref) => {
+  forwardRef<BottomSheet, Props>(({ data }, ref) => {
     return (
       <BottomSheet
         ref={ref}
-        snapPoints={['70%']}
+        snapPoints={['90%']}
         enablePanDownToClose
         index={-1}
         style={styles.contentContainer}>
         <BottomSheetView>
-          <Text>Awesome 🎉</Text>
+          <Text className="text-center">{data?.name}</Text>
+          <View>
+            <Text className="">Choose Your Modal</Text>
+          </View>
         </BottomSheetView>
       </BottomSheet>
     );
@@ -28,6 +37,5 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    alignItems: 'center',
   },
 });

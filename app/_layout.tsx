@@ -1,9 +1,9 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import 'expo-dev-client';
 import { Stack } from 'expo-router';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { DefaultTheme, PaperProvider } from 'react-native-paper';
 import '../global.css';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const queryClient = new QueryClient({});
 

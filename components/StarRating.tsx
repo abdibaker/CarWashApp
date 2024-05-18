@@ -35,6 +35,7 @@ export default function StarRating({
       <View className="flex flex-row gap-1">
         {Array.from({ length: maxRating }, (_, i) => (
           <Star
+            disabled={!isRatable}
             key={i}
             onRate={() => handleRate(i + 1)}
             full={rating >= i + 1}
@@ -51,18 +52,20 @@ export default function StarRating({
 }
 
 function Star({
+  disabled,
   onRate,
   full = false,
   color,
   size,
 }: {
+  disabled: boolean;
   onRate: () => void;
   full?: boolean;
   color: string;
   size: number;
 }) {
   return (
-    <TouchableOpacity onPress={onRate}>
+    <TouchableOpacity disabled onPress={onRate}>
       {full ? (
         <AntDesign name="star" size={size} color={color} />
       ) : (

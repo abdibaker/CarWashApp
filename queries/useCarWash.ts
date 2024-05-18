@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { api } from '@/api.config';
 
-interface CarWashes {
+export interface CarWash {
   carWashId: string;
   name: string;
   location: string;
@@ -31,7 +31,7 @@ export const useCarWash = () => {
 };
 
 const fetchCarWash = async () => {
-  const { data } = await api.get<CarWashes[]>('/carwashes');
+  const { data } = await api.get<CarWash[]>('/carwashes');
   return data.map((item) => {
     const rate = generateRate();
     return {

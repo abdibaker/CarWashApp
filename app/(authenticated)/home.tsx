@@ -1,18 +1,20 @@
 import { Feather } from '@expo/vector-icons';
 import BottomSheet from '@gorhom/bottom-sheet';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Image, ScrollView, View } from 'react-native';
 import { Button, Card, Text } from 'react-native-paper';
 
 import BSheet from '@/components/BSheet';
 import StarRating from '@/components/StarRating';
-import { useCarWash } from '@/queries/useCarWash';
+import { CarWash, useCarWash } from '@/queries/useCarWash';
 
 export default function Home() {
   const bottomSheetRef = useRef<BottomSheet>(null);
+  const [selectedCarWash, setSelectedCarWash] = useState<CarWash>();
   const { data } = useCarWash();
 
-  function handleSheetOpen() {
+  function handleSheetOpen(data: CarWash) {
+    setSelectedCarWash(data);
     bottomSheetRef.current?.expand();
   }
 
@@ -30,7 +32,7 @@ export default function Home() {
                   key={i}
                   style={{ borderRadius: 14 }}
                   className="relative"
-                  onPress={handleSheetOpen}
+                  onPress={() => handleSheetOpen(item)}
                   contentStyle={{
                     flexDirection: 'row',
                   }}>
@@ -115,7 +117,7 @@ export default function Home() {
           </>
         )}
       </ScrollView>
-      <BSheet ref={bottomSheetRef} />
+      <BSheet ref={bottomSheetRef} data={selectedCarWash!} />
     </>
   );
 }
