@@ -21,7 +21,7 @@ export default observer(() => {
       router.replace('/home');
     },
     onError: (error) => {
-      console.log('🚀 ~ observer ~ erro:', JSON.stringify(error, null, 2));
+      console.log('🚀 ~ observer ~ error:', JSON.stringify(error, null, 2));
       Alert.alert('🚫 Error', 'Invalid email or password');
     },
   });
