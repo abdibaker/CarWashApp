@@ -4,6 +4,7 @@ import { TouchableOpacity, View } from 'react-native';
 import { Text } from 'react-native-paper';
 
 export default function StarRating({
+  isRatable = true,
   className,
   maxRating = 5,
   color = '#fcc419',
@@ -12,6 +13,7 @@ export default function StarRating({
   rate = 0,
   onSetRating = () => {},
 }: {
+  isRatable?: boolean;
   className?: string;
   maxRating?: number;
   color?: string;
@@ -23,6 +25,7 @@ export default function StarRating({
   const [rating, setRating] = useState(rate);
 
   function handleRate(rating: number) {
+    if (!isRatable) return;
     setRating(rating);
     onSetRating(rating);
   }
